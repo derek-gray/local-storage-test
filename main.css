@@ -1,0 +1,82 @@
+article div {
+    margin: 10px 0;
+}
+
+label {
+    float: left;
+    display: block;
+    width: 125px;
+    line-height: 32px;
+}
+
+#fromEvent {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#modal-window {
+    background: rgba(255,255,255,0.8);
+    display: none;
+    opacity:0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    overflow: auto;
+}
+
+#modal-window:target {
+    opacity:1;
+    pointer-events: auto;
+}
+
+#modal-window > div {
+    border: 1px solid black;
+    width: 500px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    background: #fff;
+}
+
+#modal-window h2 {
+    background-color: #2748a7;
+    color: #fff;
+    font-weight: normal;
+    padding: 10px;
+}
+
+#hide-modal {
+    background: #000;
+    border: 2px solid #fff;
+    color: #fff !important;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 17px;
+    padding: 5px 0 0;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    text-decoration: none;
+    top: -10px;
+    width: 21px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -moz-box-shadow: 2px 2px 2px #000;
+    -webkit-box-shadow: 2px 2px 2px #000;
+    box-shadow: 2px 2px 2px #000;
+}
+
+.activity-tracker,
+.local-storage-test {
+    border:2px dashed #ffcc00;
+    margin-bottom:2em;
+    margin-top:2em;
+}

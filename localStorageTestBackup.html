@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>BLOOP</title>
+ 
+</head>
+
+<body>
+  <input id="button" type="button" value="signout" onclick="signout()"></input>
+  <script type="text/javascript">
+
+
+  window.addEventListener('storage', storageEvent, false);
+
+  var button = document.getElementById("button");
+
+  button.addEventListener('customEvent', function(e) {
+  	//console.log('Event is: ', e);
+  	//console.log('Custom data is: ', e.detail);
+  	myEvent.detail.date = new Date();
+  	localStorage.setItem(e.detail.val, e.detail.key);
+  	storageEvent(e);
+    
+  });
+
+  var myEvent = new CustomEvent('customEvent', {
+	  detail: {
+		  val: "showModal",
+		  key: false,
+		  date: new Date()
+	  }
+  });
+
+  function signout() {
+  	myEvent.detail.val = "signout";
+  	myEvent.detail.key = !JSON.parse(localStorage.getItem("signout"));
+    button.dispatchEvent(myEvent);
+  }
+
+  function storageEvent(e) {
+  	console.log('STORAGE EVENT FIRED fired');
+    if (localStorage.getItem('signout') == "true") {
+      console.log("Signout is true");
+    } else {
+  	  console.log("Signout is false");
+    }
+  }
+</script>
+  
+</body>
+</html>

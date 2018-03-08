@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Time Out</title>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+
+  <div id="modal-window" class="countdown-modal-dialogue">
+    <div class="modal-content">
+      <h2>You are about to be signed out</h2>
+      <p>Your session will time out in <span class="seconds-container">0</span> seconds. You can choose to extend your session by 15 minutes, or sign out now.</p>
+      <p><button class="extend-session-button">Stay signed in</button> <button class="signout-button">Sign out</button></p>
+    </div>
+  </div>
+
+  <button class="show-modal">Show modal</button>
+  <script src="sessionEvent.js"></script>
+  <script src="countdowns.js"></script>
+
+  <script type="text/javascript">
+
+    $(function(){
+      $('.signout-button').click(function(){
+        fireSessionEvent({
+          detail: {
+            type: "signout"
+          }
+        });
+      });
+
+      $('.extend-session-button').click(function(){
+        fireSessionEvent({
+          detail: {
+            type: "extend-session"
+          }
+        });
+      });
+
+      $('.show-modal').click(function(){
+        fireSessionEvent({
+          detail: {
+            type: "initiate-timeout"
+          }
+        });
+      });
+    });
+
+  new SessionManager(60, 900, $('.countdown-modal-dialogue'), $('.seconds-container'));
+  </script>
+
+</body>
+</html>

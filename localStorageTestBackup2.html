@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>BLOOP</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="sessionEvent.js"></script>
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            $('.show-modal').click(function(){
+                fireSessionEvent({
+                    detail: {
+                        type: "show-modal"
+                    }
+                });
+            });
+
+            $('.signout-button').click(function(){
+                fireSessionEvent({
+                    detail: {
+                        type: "signout"
+                    }
+                });
+            });
+
+            $('.extend-session-button').click(function(){
+                fireSessionEvent({
+                    detail: {
+                        type: "extend-session"
+                    }
+                });
+
+                fireSessionEvent({
+                    detail: {
+                        type: "hide-modal"
+                    }
+                });
+            });
+
+            addSessionEventListener(function(e){
+                var modalWindow = document.getElementById('modal-window');
+
+                switch (e.detail.type)
+                {
+                    case "show-modal" :
+                        modalWindow.style.display = 'block';
+                        modalWindow.style.opacity = '1';
+                        break;
+
+                    case "hide-modal" :
+                        modalWindow.style.display = 'none';
+                        modalWindow.style.opacity = '0';
+                        break
+
+                    case "signout" :
+                        window.location = "http://localhost:3000/signout.html";
+                        break;
+
+                    case "extend-session" :
+                        console.log("extend session here.");
+                        break;
+
+                    default :
+                        console.log("No storage event action needed");
+                        break;
+                }
+
+                console.log(e.detail.type)
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+
+
+<div id="modal-window" class="modalDialog">
+    <div class="modal-content">
+        <a href="#close" title="Close" id="hide-modal">X</a>
+        <h2>You are about to be signed out</h2>
+        <p>Your session will time out in <span id="countdown">60</span> seconds. You can choose to extend your session by 15 minutes, or sign out now.</p>
+        <p><button class="extend-session-button">Stay signed in</button> <button class="signout-button">Sign out</button></p>
+    </div>
+</div>
+
+<p><button class="show-modal" class="button">Show modal</button></p>
+<!--<button class="signout-button">Signout</button>-->
+<!--<button class="extend-session-button">Extend</button>-->
+
+</body>
+</html>
